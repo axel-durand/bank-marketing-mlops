@@ -7,7 +7,9 @@ authors = [
     { name = "ChefTheoo", email = "t.khuoy@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "pandera>=0.36.0",
+]
 
 [project.scripts]
 mlops-projet = "mlops_projet:main"
