@@ -3,11 +3,12 @@
 - **Consommateur** : pipeline `mlops_projet`
 - **Format** : CSV, séparateur `;`, exactement 17 colonnes
 - **Fréquence** : un fichier après chaque campagne
-- **Version** : 1.0
+- **Version** : 1.1
 ## Règles principales
 - age entre 18 et 100 ; y vaut `yes` ou `no`
 - catégories dans la liste connue (`unknown` autorisé)
 - balance sans limite (un solde peut être négatif)
+- campaign entre 1 et 100 (au-delà : erreur de saisie)
 - Détail complet : `src/mlops_projet/data/schema.py`
 ## Si le contrat n'est pas respecté
 Le pipeline s'arrête, on n'entraîne pas, et on prévient le producteur.

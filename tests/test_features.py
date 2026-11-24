@@ -25,3 +25,11 @@ def test_meme_calcul_entrainement_et_prediction():
     client = df.iloc[0].drop(["duration", "y"]).to_dict()
     prediction = build_features(pd.DataFrame([client]))
     pd.testing.assert_frame_equal(entrainement, prediction)
+
+def test_nb_credits():
+    features = build_features(load_bank_data())
+    assert set(features["nb_credits"]) <= {0, 1, 2, 3}
+    # un client avec crédit immo + prêt perso, sans défaut -> 2
+    client = load_bank_data().iloc[[0]].copy()
+    client[["default", "housing", "loan"]] = ["no", "yes", "yes"]
+    assert build_features(client)["nb_credits"].iloc[0] == 2
