@@ -19,6 +19,11 @@ def build_features(df):
         bins=[17, 29, 45, 60, 100],
         labels=["18-29", "30-45", "46-60", "61+"],
     ).astype(str)
+    features["nb_credits"] = (
+        (df["default"] == "yes").astype(int)
+        + (df["housing"] == "yes").astype(int)
+        + (df["loan"] == "yes").astype(int)
+    )
     return features
 
 def build_target(df):
@@ -31,6 +36,6 @@ def main():
     table["target"] = build_target(df)
     table.to_parquet(FEATURES_PATH, index=False)
     print(f"Jeu de features écrit dans {FEATURES_PATH.name} : {table.shape}")
-    
+
 if __name__ == "__main__":
  main()
